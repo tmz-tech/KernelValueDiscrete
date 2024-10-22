@@ -587,7 +587,8 @@ class BasisNextSAExpectData(BaseEstimator):
         K = np.exp(-0.5 * u**2) / np.sqrt(2 * np.pi)
         
         # Create an array filled with the first element of x and append it to the next state data
-        add_x = np.full(self.X_next.shape, x[0])  # Broadcast x[0] to match the shape of X_next
+        #add_x = np.full(self.X_next.shape, x[0])  # Broadcast x[0] to match the shape of X_next
+        add_x = np.tile(x[:-1], (self.X_next.shape[0], 1))
         state_next_ = np.hstack((self.X_next, add_x))  # Concatenate next state data with add_x
 
         # Compute the basis functions for the extended next state
